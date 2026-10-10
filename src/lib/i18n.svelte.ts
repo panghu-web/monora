@@ -70,6 +70,16 @@ const zh = {
     rights: '保留所有权利',
   },
   cookie: { text: '本站使用 Cookie 来保证基本功能正常运行。', ok: '知道了' },
+  mail: {
+    subject: '预订上门清洁',
+    intro: '你好,我想预订一次上门清洁,需求如下:',
+    fill: '请帮我安排,以下是我的信息:',
+    date: '希望上门的日期和时间',
+    address: '详细地址',
+    phone: '联系电话',
+    notes: '其他说明(有无宠物、重点清洁区域等)',
+    thanks: '期待回复,谢谢!',
+  },
 };
 
 const en: typeof zh = {
@@ -136,6 +146,16 @@ const en: typeof zh = {
     rights: 'All rights reserved',
   },
   cookie: { text: 'This site uses cookies to keep basic features working.', ok: 'Got it' },
+  mail: {
+    subject: 'Cleaning booking request',
+    intro: 'Hello, I would like to book a home cleaning with the following details:',
+    fill: 'Please arrange a visit. My details are below:',
+    date: 'Preferred date and time',
+    address: 'Full address',
+    phone: 'Contact number',
+    notes: 'Other notes (pets, areas needing extra attention, etc.)',
+    thanks: 'Looking forward to your reply. Thank you!',
+  },
 };
 
 const dicts = { zh, en };

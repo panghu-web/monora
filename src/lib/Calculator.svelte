@@ -1,17 +1,10 @@
 <script lang="ts">
+  import { booking, bookingHref, total } from './booking.svelte';
   import { CURRENCY, t } from './i18n.svelte';
 
-  // 起步价含 1 个房间 + 1 个浴室,每多一间各加一份
-  const PRICE = { base: 40, room: 20, bath: 20 };
-
-  let rooms = $state(1);
-  let baths = $state(1);
-
-  const total = $derived(PRICE.base + (rooms - 1) * PRICE.room + (baths - 1) * PRICE.bath);
-
   const rows = $derived([
-    { label: t().calc.rooms, get: () => rooms, set: (v: number) => (rooms = v), min: 1 },
-    { label: t().calc.baths, get: () => baths, set: (v: number) => (baths = v), min: 1 },
+    { label: t().calc.rooms, get: () => booking.rooms, set: (v: number) => (booking.rooms = v), min: 1 },
+    { label: t().calc.baths, get: () => booking.baths, set: (v: number) => (booking.baths = v), min: 1 },
   ]);
 </script>
 
@@ -29,9 +22,9 @@
 
   <div class="total">
     <span>{t().calc.estimate}</span>
-    <strong>{total} {CURRENCY}</strong>
+    <strong>{total()} {CURRENCY}</strong>
   </div>
-  <a class="btn btn-dark" href="#book">{t().calc.cta}</a>
+  <a class="btn btn-dark" href={bookingHref()}>{t().calc.cta}</a>
 </div>
 
 <style>

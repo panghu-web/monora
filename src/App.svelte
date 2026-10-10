@@ -2,6 +2,7 @@
   import Calculator from './lib/Calculator.svelte';
   import Compare from './lib/Compare.svelte';
   import Wipe from './lib/Wipe.svelte';
+  import { bookingHref } from './lib/booking.svelte';
   import { BRAND, COMPANY, EMAIL, LANGS, PHONE, i18n, setLang, t } from './lib/i18n.svelte';
 
   const BASE = import.meta.env.BASE_URL;
@@ -50,7 +51,7 @@
       </button>
     {/each}
   </div>
-  <a class="btn btn-accent" href="#book">{t().nav.book}</a>
+  <a class="btn btn-accent" href={bookingHref()}>{t().nav.book}</a>
 </header>
 
 <main id="top">
@@ -131,7 +132,7 @@
     <div class="cta">
       <h2>{t().cta.title}</h2>
       <p>{t().cta.sub}</p>
-      <a class="btn btn-accent" href="mailto:{EMAIL}">{t().cta.btn}</a>
+      <a class="btn btn-accent" href={bookingHref()}>{t().cta.btn}</a>
     </div>
   </section>
 </main>
