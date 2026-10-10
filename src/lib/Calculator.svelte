@@ -1,39 +1,21 @@
 <script lang="ts">
   import { CURRENCY, t } from './i18n.svelte';
 
-  // 示例价格,上线前替换
-  const PRICE = {
-    standard: { base: 200, room: 60, bath: 40, window: 15 },
-    deep: { base: 320, room: 90, bath: 60, window: 15 },
-  };
-  type Plan = keyof typeof PRICE;
+  // 起步价含 1 个房间 + 1 个浴室,每多一间各加一份
+  const PRICE = { base: 40, room: 20, bath: 20 };
 
-  let plan = $state<Plan>('standard');
   let rooms = $state(1);
   let baths = $state(1);
-  let windows = $state(0);
 
-  const total = $derived.by(() => {
-    const p = PRICE[plan];
-    return p.base + (rooms - 1) * p.room + (baths - 1) * p.bath + windows * p.window;
-  });
+  const total = $derived(PRICE.base + (rooms - 1) * PRICE.room + (baths - 1) * PRICE.bath);
 
   const rows = $derived([
     { label: t().calc.rooms, get: () => rooms, set: (v: number) => (rooms = v), min: 1 },
     { label: t().calc.baths, get: () => baths, set: (v: number) => (baths = v), min: 1 },
-    { label: t().calc.windows, get: () => windows, set: (v: number) => (windows = v), min: 0 },
   ]);
 </script>
 
 <div class="calc">
-  <div class="tabs" role="tablist">
-    {#each ['standard', 'deep'] as const as p}
-      <button role="tab" aria-selected={plan === p} class:active={plan === p} onclick={() => (plan = p)}>
-        {t().calc[p]}
-      </button>
-    {/each}
-  </div>
-
   {#each rows as row}
     <div class="row">
       <span>{row.label}</span>
@@ -62,21 +44,6 @@
     box-shadow: var(--shadow);
     display: grid;
     gap: 12px;
-  }
-  .tabs {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8px;
-  }
-  .tabs button {
-    padding: 10px;
-    border-radius: 10px;
-    background: var(--muted);
-    font-weight: 600;
-  }
-  .tabs button.active {
-    background: var(--brand);
-    color: var(--accent);
   }
   .row {
     display: flex;

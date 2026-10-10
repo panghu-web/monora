@@ -2,13 +2,14 @@
   import Calculator from './lib/Calculator.svelte';
   import Compare from './lib/Compare.svelte';
   import Wipe from './lib/Wipe.svelte';
-  import { BRAND, COMPANY, CURRENCY, EMAIL, LANGS, PHONE, i18n, t } from './lib/i18n.svelte';
+  import { BRAND, COMPANY, EMAIL, LANGS, i18n, setLang, t } from './lib/i18n.svelte';
 
   const BASE = import.meta.env.BASE_URL;
   const HERO_IMG = `${import.meta.env.BASE_URL}hero.jpg`;
-  const COMPARE_IMGS = ['kitchen', 'bathroom', 'living'].map((n) => `${import.meta.env.BASE_URL}${n}.jpg`);
-  const PLAN_PRICES = [200, 320, null, null]; // 示例价格;null = 按需报价
-  let cookieOk = $state(false);
+  const COMPARE_IMGS = ['kitchen', 'bathroom', 'living'].map((n) => ({
+    after: `${BASE}${n}.jpg`,
+    before: `${BASE}${n}-before.jpg`,
+  }));
 
   $effect(() => {
     document.documentElement.lang = i18n.lang;
@@ -18,10 +19,16 @@
 <header class="nav">
   <a class="brand" href="#top"><img src="{BASE}logo-wordmark.png" alt={COMPANY} width="720" height="149" /></a>
   <nav>
-    <a href="#services">{t().nav.services}</a>
     <a href="#why">{t().nav.why}</a>
     <a href="#contact">{t().nav.contact}</a>
   </nav>
+  <div class="langs">
+    {#each LANGS as lang}
+      <button class:active={i18n.lang === lang.code} aria-pressed={i18n.lang === lang.code} onclick={() => setLang(lang.code)}>
+        {lang.short}
+      </button>
+    {/each}
+  </div>
   <a class="btn btn-accent" href="#book">{t().nav.book}</a>
 </header>
 
@@ -32,23 +39,6 @@
       <h1>{t().hero.title[0]}<br />{t().hero.title[1]}</h1>
       <p>{t().hero.sub}</p>
       <Calculator />
-    </div>
-  </section>
-
-  <section id="services" class="wrap">
-    <p class="kicker">{t().plans.kicker}</p>
-    <h2>{t().plans.title}</h2>
-    <div class="grid four">
-      {#each t().plans.items as item, i}
-        {@const price = PLAN_PRICES[i]}
-        <article class="card">
-          <span class="badge">{i + 1}</span>
-          <h3>{item.name}</h3>
-          <p>{item.desc}</p>
-          <strong>{price ? `${price} ${CURRENCY} ${t().plans.from}` : t().plans.quote}</strong>
-          <a class="btn btn-outline" href="#book">{price ? t().plans.pick : t().plans.ask}</a>
-        </article>
-      {/each}
     </div>
   </section>
 
@@ -73,7 +63,7 @@
     <h2>{t().compare.title}</h2>
     <div class="grid three">
       {#each t().compare.labels as label, i}
-        <Compare {label} img={COMPARE_IMGS[i]} />
+        <Compare {label} img={COMPARE_IMGS[i].after} before={COMPARE_IMGS[i].before} />
       {/each}
     </div>
   </section>
@@ -129,13 +119,6 @@
   <div class="wrap grid three">
     <div>
       <img class="mark" src="{BASE}logo-mark.png" alt={BRAND} width="512" height="470" />
-      <div class="langs">
-        {#each LANGS as lang}
-          <button class:active={i18n.lang === lang.code} onclick={() => (i18n.lang = lang.code)}>
-            {lang.label}
-          </button>
-        {/each}
-      </div>
       <small>© {new Date().getFullYear()} {COMPANY} · {t().footer.rights}</small>
     </div>
     <div>
@@ -146,19 +129,12 @@
     </div>
     <div>
       <h3>{t().footer.contact}</h3>
-      <a href="tel:{PHONE.replaceAll(' ', '')}">{PHONE}</a>
       <a href="mailto:{EMAIL}">{EMAIL}</a>
       <span>{t().footer.address}</span>
     </div>
   </div>
 </footer>
 
-{#if !cookieOk}
-  <div class="cookie" role="status">
-    <span>{t().cookie.text}</span>
-    <button class="btn btn-dark" onclick={() => (cookieOk = true)}>{t().cookie.ok}</button>
-  </div>
-{/if}
 
 <style>
   .nav {
@@ -177,7 +153,7 @@
     color: #f1e9d8;
     display: flex;
     align-items: center;
-    gap: 24px;
+    gap: 16px;
   }
   .nav nav {
     display: flex;
@@ -241,11 +217,6 @@
     background: var(--brand);
     color: #fff;
   }
-  .kicker {
-    color: var(--accent-ink);
-    font-weight: 700;
-    margin-bottom: 4px;
-  }
   h2 {
     font-size: clamp(26px, 4vw, 40px);
     margin-bottom: 28px;
@@ -263,9 +234,6 @@
   }
   .three {
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  }
-  .four {
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   }
   .split {
     display: grid;
@@ -285,10 +253,6 @@
   }
   .card p {
     color: var(--ink-soft);
-  }
-  .card .btn {
-    margin-top: 6px;
-    text-align: center;
   }
   .card.flat {
     background: rgb(255 255 255 / 0.08);
@@ -391,13 +355,15 @@
   }
   .langs {
     display: flex;
-    gap: 8px;
+    padding: 3px;
+    border-radius: 999px;
+    border: 1px solid rgb(201 164 92 / 0.35);
+    font-size: 13px;
+    font-weight: 600;
   }
   .langs button {
-    padding: 4px 12px;
+    padding: 4px 10px;
     border-radius: 999px;
-    border: 1px solid rgb(255 255 255 / 0.3);
-    color: inherit;
   }
   .langs button.active {
     background: var(--accent);
@@ -405,30 +371,24 @@
     color: var(--on-accent);
   }
 
-  .cookie {
-    position: fixed;
-    z-index: 10;
-    bottom: 16px;
-    left: 50%;
-    translate: -50% 0;
-    width: min(calc(100% - 32px), 560px);
-    padding: 12px 12px 12px 20px;
-    border-radius: 999px;
-    background: var(--surface);
-    box-shadow: var(--shadow);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-    font-size: 14px;
-  }
 
   @media (max-width: 720px) {
     .nav nav {
       display: none;
     }
     .nav {
-      justify-content: space-between;
+      gap: 8px;
+      padding-left: 16px;
+    }
+    .brand {
+      margin-right: auto;
+    }
+    .brand img {
+      height: 26px;
+    }
+    .nav :global(.btn) {
+      padding: 10px 14px;
+      font-size: 14px;
     }
     .split,
     .two {
@@ -437,9 +397,6 @@
     .wrap,
     .band > .wrap {
       padding-block: 48px;
-    }
-    .cookie {
-      border-radius: var(--radius-lg);
     }
   }
 </style>

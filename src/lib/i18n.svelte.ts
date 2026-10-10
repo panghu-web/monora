@@ -2,38 +2,20 @@
 
 export const BRAND = 'Monora';
 export const COMPANY = 'Monora Cleaning Services LLC';
-export const PHONE = '+000 00 000 0000';
-export const EMAIL = 'hello@example.com';
+export const EMAIL = 'monorabuilding@gmail.com';
 export const CURRENCY = 'AED';
 
 const zh = {
-  nav: { services: '服务', why: '为什么选我们', contact: '联系我们', book: '立即预订' },
+  nav: { why: '为什么选我们', contact: '联系我们', book: '立即预订' },
   hero: {
     title: ['家里干净了,', '心也跟着松下来。'],
     sub: '上门家居与办公室清洁。在线算好价格,约好时间,剩下的交给我们。',
   },
   calc: {
-    standard: '日常清洁',
-    deep: '深度清洁',
     rooms: '房间',
     baths: '浴室',
-    windows: '窗户',
     estimate: '预估价格',
     cta: '按这个价格预订',
-  },
-  plans: {
-    kicker: '选择套餐',
-    title: '按你的需要来。',
-    from: '起',
-    quote: '按需报价',
-    pick: '选择',
-    ask: '咨询',
-    items: [
-      { name: '日常清洁', desc: '每周或隔周一次,让家里一直保持整洁。' },
-      { name: '深度清洁', desc: '边角、缝隙、油污,一次彻底处理。' },
-      { name: '办公室清洁', desc: '下班后进场,不打扰白天的工作。' },
-      { name: '上门小修', desc: '换灯泡、装窗帘、修插座这类零活。' },
-    ],
   },
   why: {
     title: '为什么选我们',
@@ -86,37 +68,19 @@ const zh = {
     address: '地址占位 · 城市,国家',
     rights: '保留所有权利',
   },
-  cookie: { text: '本站使用 Cookie 来保证基本功能正常运行。', ok: '知道了' },
 };
 
 const en: typeof zh = {
-  nav: { services: 'Services', why: 'Why us', contact: 'Contact', book: 'Book now' },
+  nav: { why: 'Why us', contact: 'Contact', book: 'Book now' },
   hero: {
     title: ['A clean home,', 'and one less thing to think about.'],
     sub: 'Home and office cleaning at your door. Get a price online, pick a time, and leave the rest to us.',
   },
   calc: {
-    standard: 'Regular',
-    deep: 'Deep clean',
     rooms: 'Rooms',
     baths: 'Bathrooms',
-    windows: 'Windows',
     estimate: 'Estimated price',
     cta: 'Book at this price',
-  },
-  plans: {
-    kicker: 'Choose a plan',
-    title: 'Built around what you need.',
-    from: 'from',
-    quote: 'Quote on request',
-    pick: 'Select',
-    ask: 'Ask',
-    items: [
-      { name: 'Regular clean', desc: 'Weekly or fortnightly visits that keep things tidy.' },
-      { name: 'Deep clean', desc: 'Corners, grout and grease, dealt with in one go.' },
-      { name: 'Office clean', desc: 'We come after hours so your day is not interrupted.' },
-      { name: 'Small repairs', desc: 'Bulbs, curtain rails, sockets and other odd jobs.' },
-    ],
   },
   why: {
     title: 'Why us',
@@ -169,17 +133,42 @@ const en: typeof zh = {
     address: 'Address placeholder · City, Country',
     rights: 'All rights reserved',
   },
-  cookie: { text: 'This site uses cookies to keep basic features working.', ok: 'Got it' },
 };
 
 const dicts = { zh, en };
 export type Lang = keyof typeof dicts;
-export const LANGS: { code: Lang; label: string }[] = [
-  { code: 'zh', label: '中文' },
-  { code: 'en', label: 'English' },
+export const LANGS: { code: Lang; short: string }[] = [
+  { code: 'zh', short: '中' },
+  { code: 'en', short: 'EN' },
 ];
 
-export const i18n = $state({ lang: 'zh' as Lang });
+const STORAGE_KEY = 'lang';
+
+// 首次访问按浏览器语言定:偏好列表里先出现中文就用中文,否则英文;手动切换过的以用户选择为准
+function detect(): Lang {
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved && saved in dicts) return saved as Lang;
+  } catch {
+    // 隐私模式下读不了存储,按浏览器语言走
+  }
+  for (const tag of navigator.languages ?? [navigator.language]) {
+    const code = tag.toLowerCase().split('-')[0];
+    if (code in dicts) return code as Lang;
+  }
+  return 'en';
+}
+
+export const i18n = $state({ lang: detect() });
+
+export function setLang(lang: Lang) {
+  i18n.lang = lang;
+  try {
+    localStorage.setItem(STORAGE_KEY, lang);
+  } catch {
+    // 存不了就只在本次访问生效
+  }
+}
 
 export function t() {
   return dicts[i18n.lang];
