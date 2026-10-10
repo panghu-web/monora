@@ -1,10 +1,12 @@
 <script lang="ts">
-  import { booking, bookingHref, total } from './booking.svelte';
+  import { KITCHENS, booking, bookingHref, total } from './booking.svelte';
   import { CURRENCY, t } from './i18n.svelte';
 
   const rows = $derived([
-    { label: t().calc.rooms, get: () => booking.rooms, set: (v: number) => (booking.rooms = v), min: 1 },
-    { label: t().calc.baths, get: () => booking.baths, set: (v: number) => (booking.baths = v), min: 1 },
+    { label: t().calc.rooms, get: () => booking.rooms, set: (v: number) => (booking.rooms = v), min: 1, fixed: false },
+    { label: t().calc.baths, get: () => booking.baths, set: (v: number) => (booking.baths = v), min: 1, fixed: false },
+    // 厨房必选、数量固定,两个按钮都不可点
+    { label: t().calc.kitchen, get: () => KITCHENS, set: () => {}, min: KITCHENS, fixed: true },
   ]);
 </script>
 
@@ -15,7 +17,7 @@
       <div class="stepper">
         <button aria-label="-" disabled={row.get() <= row.min} onclick={() => row.set(row.get() - 1)}>−</button>
         <output>{row.get()}</output>
-        <button aria-label="+" disabled={row.get() >= 20} onclick={() => row.set(row.get() + 1)}>+</button>
+        <button aria-label="+" disabled={row.fixed || row.get() >= 20} onclick={() => row.set(row.get() + 1)}>+</button>
       </div>
     </div>
   {/each}

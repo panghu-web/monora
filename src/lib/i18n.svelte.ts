@@ -15,6 +15,7 @@ const zh = {
   calc: {
     rooms: '房间',
     baths: '浴室',
+    kitchen: '厨房',
     estimate: '预估价格',
     cta: '按这个价格预订',
   },
@@ -89,6 +90,7 @@ const en: typeof zh = {
   calc: {
     rooms: 'Rooms',
     baths: 'Bathrooms',
+    kitchen: 'Kitchen',
     estimate: 'Estimated price',
     cta: 'Book at this price',
   },
