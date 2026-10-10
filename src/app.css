@@ -1,12 +1,14 @@
 /* 设计令牌:配色 / 圆角 / 阴影的唯一来源 */
 :root {
-  --brand: #17403a;
-  --accent: #8c2f39;
-  --bg: #f6f3ec;
+  --brand: #0e0d0b; /* logo 的黑底 */
+  --accent: #c9a45c; /* logo 的金色 */
+  --accent-ink: #86652a; /* 浅底上的金色文字,保证对比度 */
+  --on-accent: #1a1509;
+  --bg: #f7f4ee;
   --surface: #fff;
-  --muted: #f1eee7;
-  --ink: #1c2422;
-  --ink-soft: #5d6663;
+  --muted: #f1ede4;
+  --ink: #1a1815;
+  --ink-soft: #625c52;
   --line: #ddd8cc;
   --radius-lg: 22px;
   --shadow: 0 10px 30px rgb(0 0 0 / 0.08);
@@ -71,11 +73,11 @@ button {
 }
 .btn-dark {
   background: var(--brand);
-  color: #fff;
+  color: var(--accent);
 }
 .btn-accent {
-  background: var(--accent);
-  color: #fff;
+  background: linear-gradient(135deg, #e6cb8a, var(--accent) 55%, #a8843f);
+  color: var(--on-accent);
 }
 .btn-outline {
   border: 1.5px solid var(--brand);

@@ -75,8 +75,8 @@
     font-weight: 600;
   }
   .tabs button.active {
-    background: var(--accent);
-    color: #fff;
+    background: var(--brand);
+    color: var(--accent);
   }
   .row {
     display: flex;

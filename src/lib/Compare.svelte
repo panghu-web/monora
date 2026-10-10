@@ -1,16 +1,16 @@
 <script lang="ts">
   import { t } from './i18n.svelte';
 
-  // 没有素材时用渐变占位;有图后传 before / after 图片地址
-  let { label, before, after }: { label: string; before?: string; after?: string } = $props();
+  // 只有一张图时,「清洁前」用同一张图加滤镜做旧;有真实的前后对照图就传 before
+  let { label, img, before }: { label: string; img: string; before?: string } = $props();
   let pos = $state(50);
 </script>
 
 <figure class="compare" style:--pos="{pos}%">
-  <div class="pane after" style:background-image={after ? `url(${after})` : undefined}>
+  <div class="pane after" style:background-image="url({img})">
     <span class="tag right">{t().compare.after}</span>
   </div>
-  <div class="pane before" style:background-image={before ? `url(${before})` : undefined}>
+  <div class="pane before" class:aged={!before} style:background-image="url({before ?? img})">
     <span class="tag">{t().compare.before}</span>
   </div>
   <div class="handle" aria-hidden="true">↔</div>
@@ -33,11 +33,10 @@
     background-size: cover;
     background-position: center;
   }
-  .after {
-    background-image: linear-gradient(135deg, #f4f1ea, #cfe3da 60%, #9fc4b5);
+  .aged {
+    filter: grayscale(0.75) sepia(0.35) brightness(0.62) contrast(0.85);
   }
   .before {
-    background-image: linear-gradient(135deg, #8a8073, #6b6257 60%, #4d463e);
     clip-path: inset(0 calc(100% - var(--pos)) 0 0);
   }
   .tag {

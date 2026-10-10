@@ -2,9 +2,11 @@
   import Calculator from './lib/Calculator.svelte';
   import Compare from './lib/Compare.svelte';
   import Wipe from './lib/Wipe.svelte';
-  import { BRAND, CURRENCY, EMAIL, LANGS, PHONE, i18n, t } from './lib/i18n.svelte';
+  import { BRAND, COMPANY, CURRENCY, EMAIL, LANGS, PHONE, i18n, t } from './lib/i18n.svelte';
 
-  const HERO_IMG = `${import.meta.env.BASE_URL}hero.svg`;
+  const BASE = import.meta.env.BASE_URL;
+  const HERO_IMG = `${import.meta.env.BASE_URL}hero.jpg`;
+  const COMPARE_IMGS = ['kitchen', 'bathroom', 'living'].map((n) => `${import.meta.env.BASE_URL}${n}.jpg`);
   const PLAN_PRICES = [200, 320, null, null]; // 示例价格;null = 按需报价
   let cookieOk = $state(false);
 
@@ -14,13 +16,13 @@
 </script>
 
 <header class="nav">
-  <a class="brand" href="#top">{BRAND}</a>
+  <a class="brand" href="#top"><img src="{BASE}logo-wordmark.png" alt={COMPANY} width="720" height="149" /></a>
   <nav>
     <a href="#services">{t().nav.services}</a>
     <a href="#why">{t().nav.why}</a>
     <a href="#contact">{t().nav.contact}</a>
   </nav>
-  <a class="btn btn-dark" href="#book">{t().nav.book}</a>
+  <a class="btn btn-accent" href="#book">{t().nav.book}</a>
 </header>
 
 <main id="top">
@@ -70,8 +72,8 @@
   <section class="wrap">
     <h2>{t().compare.title}</h2>
     <div class="grid three">
-      {#each t().compare.labels as label}
-        <Compare {label} />
+      {#each t().compare.labels as label, i}
+        <Compare {label} img={COMPARE_IMGS[i]} />
       {/each}
     </div>
   </section>
@@ -126,7 +128,7 @@
 <footer id="contact" class="footer">
   <div class="wrap grid three">
     <div>
-      <b class="brand">{BRAND}</b>
+      <img class="mark" src="{BASE}logo-mark.png" alt={BRAND} width="512" height="470" />
       <div class="langs">
         {#each LANGS as lang}
           <button class:active={i18n.lang === lang.code} onclick={() => (i18n.lang = lang.code)}>
@@ -134,7 +136,7 @@
           </button>
         {/each}
       </div>
-      <small>© {new Date().getFullYear()} {BRAND} · {t().footer.rights}</small>
+      <small>© {new Date().getFullYear()} {COMPANY} · {t().footer.rights}</small>
     </div>
     <div>
       <h3>{t().footer.info}</h3>
@@ -168,9 +170,11 @@
     width: min(calc(100% - 32px), var(--max));
     padding: 10px 12px 10px 22px;
     border-radius: 999px;
-    background: rgb(255 255 255 / 0.92);
+    background: rgb(14 13 11 / 0.9);
     backdrop-filter: blur(10px);
     box-shadow: var(--shadow);
+    border: 1px solid rgb(201 164 92 / 0.28);
+    color: #f1e9d8;
     display: flex;
     align-items: center;
     gap: 24px;
@@ -181,10 +185,17 @@
     margin-inline: auto;
     font-weight: 500;
   }
-  .brand {
-    font-size: 20px;
-    font-weight: 800;
+  .brand img {
+    display: block;
+    height: 34px;
+    width: auto;
+  }
+  .nav nav a:hover {
     color: var(--accent);
+  }
+  .mark {
+    width: 96px;
+    height: auto;
   }
 
   .hero {
@@ -231,7 +242,7 @@
     color: #fff;
   }
   .kicker {
-    color: var(--accent);
+    color: var(--accent-ink);
     font-weight: 700;
     margin-bottom: 4px;
   }
@@ -296,8 +307,9 @@
     border-radius: 12px;
     display: grid;
     place-items: center;
-    background: var(--accent);
-    color: #fff;
+    background: var(--brand);
+    color: var(--accent);
+    border: 1px solid rgb(201 164 92 / 0.4);
     font-weight: 700;
   }
   .stars {
@@ -336,7 +348,7 @@
     content: '+';
     font-size: 22px;
     line-height: 1;
-    color: var(--accent);
+    color: var(--accent-ink);
   }
   details[open] summary::after {
     content: '−';
@@ -361,7 +373,7 @@
   }
 
   .footer {
-    background: #0d2420;
+    background: #060605;
     color: rgb(255 255 255 / 0.8);
     font-size: 14px;
   }
@@ -377,9 +389,6 @@
     color: #fff;
     font-size: 15px;
   }
-  .footer .brand {
-    color: #fff;
-  }
   .langs {
     display: flex;
     gap: 8px;
@@ -391,8 +400,9 @@
     color: inherit;
   }
   .langs button.active {
-    background: #fff;
-    color: var(--ink);
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--on-accent);
   }
 
   .cookie {

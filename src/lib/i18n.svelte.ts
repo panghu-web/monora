@@ -1,6 +1,7 @@
 // 文案全部在这里。品牌名、电话、邮箱、价格都是占位,上线前替换。
 
-export const BRAND = 'YourBrand';
+export const BRAND = 'Monora';
+export const COMPANY = 'Monora Cleaning Services LLC';
 export const PHONE = '+000 00 000 0000';
 export const EMAIL = 'hello@example.com';
 export const CURRENCY = 'AED';
