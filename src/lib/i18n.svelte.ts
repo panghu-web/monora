@@ -2,6 +2,7 @@
 
 export const BRAND = 'Monora';
 export const COMPANY = 'Monora Cleaning Services LLC';
+export const PHONE = '+971 50 683 8899';
 export const EMAIL = 'monorabuilding@gmail.com';
 export const CURRENCY = 'AED';
 
@@ -27,7 +28,7 @@ const zh = {
       { name: '不满意重做', desc: '一天内反馈,免费回来返工。' },
     ],
   },
-  compare: { title: '清洁前后', before: '清洁前', after: '清洁后', labels: ['厨房', '浴室', '客厅'] },
+  compare: { title: '清洁前后', before: '清洁前', after: '清洁后', labels: ['厨房', '卧室', '客厅', '浴室'] },
   reviews: {
     title: '客户怎么说',
     items: [
@@ -65,9 +66,10 @@ const zh = {
     info: '信息',
     links: ['隐私政策', 'Cookie 政策', '使用条款'],
     contact: '联系我们',
-    address: '地址占位 · 城市,国家',
+    address: 'UAE. Ras Al Khaimah',
     rights: '保留所有权利',
   },
+  cookie: { text: '本站使用 Cookie 来保证基本功能正常运行。', ok: '知道了' },
 };
 
 const en: typeof zh = {
@@ -92,7 +94,7 @@ const en: typeof zh = {
       { name: 'Redo guarantee', desc: 'Tell us within a day and we fix it free.' },
     ],
   },
-  compare: { title: 'Before and after', before: 'Before', after: 'After', labels: ['Kitchen', 'Bathroom', 'Living room'] },
+  compare: { title: 'Before and after', before: 'Before', after: 'After', labels: ['Kitchen', 'Bedroom', 'Living room', 'Bathroom'] },
   reviews: {
     title: 'What customers say',
     items: [
@@ -130,9 +132,10 @@ const en: typeof zh = {
     info: 'Information',
     links: ['Privacy policy', 'Cookie policy', 'Terms of use'],
     contact: 'Contact',
-    address: 'Address placeholder · City, Country',
+    address: 'UAE. Ras Al Khaimah',
     rights: 'All rights reserved',
   },
+  cookie: { text: 'This site uses cookies to keep basic features working.', ok: 'Got it' },
 };
 
 const dicts = { zh, en };

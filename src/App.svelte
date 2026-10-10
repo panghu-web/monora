@@ -2,14 +2,35 @@
   import Calculator from './lib/Calculator.svelte';
   import Compare from './lib/Compare.svelte';
   import Wipe from './lib/Wipe.svelte';
-  import { BRAND, COMPANY, EMAIL, LANGS, i18n, setLang, t } from './lib/i18n.svelte';
+  import { BRAND, COMPANY, EMAIL, LANGS, PHONE, i18n, setLang, t } from './lib/i18n.svelte';
 
   const BASE = import.meta.env.BASE_URL;
   const HERO_IMG = `${import.meta.env.BASE_URL}hero.jpg`;
-  const COMPARE_IMGS = ['kitchen', 'bathroom', 'living'].map((n) => ({
+  const COMPARE_IMGS = ['kitchen', 'bedroom', 'living', 'bathroom'].map((n) => ({
     after: `${BASE}${n}.jpg`,
     before: `${BASE}${n}-before.jpg`,
   }));
+
+  const COOKIE_KEY = 'cookie-ok';
+
+  // 点过「知道了」就记在本地,之后不再弹
+  function readCookieOk() {
+    try {
+      return localStorage.getItem(COOKIE_KEY) === '1';
+    } catch {
+      return false; // 读不了存储就每次都提示
+    }
+  }
+  let cookieOk = $state(readCookieOk());
+
+  function acceptCookie() {
+    cookieOk = true;
+    try {
+      localStorage.setItem(COOKIE_KEY, '1');
+    } catch {
+      // 存不了就只在本次访问生效
+    }
+  }
 
   $effect(() => {
     document.documentElement.lang = i18n.lang;
@@ -129,12 +150,19 @@
     </div>
     <div>
       <h3>{t().footer.contact}</h3>
+      <a href="tel:{PHONE.replaceAll(' ', '')}">{PHONE}</a>
       <a href="mailto:{EMAIL}">{EMAIL}</a>
       <span>{t().footer.address}</span>
     </div>
   </div>
 </footer>
 
+{#if !cookieOk}
+  <div class="cookie" role="status">
+    <span>{t().cookie.text}</span>
+    <button class="btn btn-dark" onclick={acceptCookie}>{t().cookie.ok}</button>
+  </div>
+{/if}
 
 <style>
   .nav {
@@ -372,7 +400,28 @@
   }
 
 
+  .cookie {
+    position: fixed;
+    z-index: 10;
+    bottom: 16px;
+    left: 50%;
+    translate: -50% 0;
+    width: min(calc(100% - 32px), 560px);
+    padding: 12px 12px 12px 20px;
+    border-radius: 999px;
+    background: var(--surface);
+    box-shadow: var(--shadow);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    font-size: 14px;
+  }
+
   @media (max-width: 720px) {
+    .cookie {
+      border-radius: var(--radius-lg);
+    }
     .nav nav {
       display: none;
     }
