@@ -24,7 +24,7 @@
     <span>{t().calc.estimate}</span>
     <strong>{total()} {CURRENCY}</strong>
   </div>
-  <a class="btn btn-dark" href={bookingHref()}>{t().calc.cta}</a>
+  <a class="btn btn-dark" href={bookingHref()} target="_blank" rel="noopener">{t().calc.cta}</a>
 </div>
 
 <style>

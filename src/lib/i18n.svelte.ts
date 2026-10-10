@@ -64,14 +64,12 @@ const zh = {
   cta: { title: '现在就约一次', sub: '选个方便的时间,我们准时到。', btn: '去预订' },
   footer: {
     info: '信息',
-    links: ['隐私政策', 'Cookie 政策', '使用条款'],
     contact: '联系我们',
     address: 'UAE. Ras Al Khaimah',
     rights: '保留所有权利',
   },
   cookie: { text: '本站使用 Cookie 来保证基本功能正常运行。', ok: '知道了' },
   mail: {
-    subject: '预订上门清洁',
     intro: '你好,我想预订一次上门清洁,需求如下:',
     fill: '请帮我安排,以下是我的信息:',
     date: '希望上门的日期和时间',
@@ -140,14 +138,12 @@ const en: typeof zh = {
   cta: { title: 'Book your first visit', sub: 'Pick a time that suits you and we will be there.', btn: 'Book now' },
   footer: {
     info: 'Information',
-    links: ['Privacy policy', 'Cookie policy', 'Terms of use'],
     contact: 'Contact',
     address: 'UAE. Ras Al Khaimah',
     rights: 'All rights reserved',
   },
   cookie: { text: 'This site uses cookies to keep basic features working.', ok: 'Got it' },
   mail: {
-    subject: 'Cleaning booking request',
     intro: 'Hello, I would like to book a home cleaning with the following details:',
     fill: 'Please arrange a visit. My details are below:',
     date: 'Preferred date and time',

@@ -3,6 +3,7 @@
   import Compare from './lib/Compare.svelte';
   import Wipe from './lib/Wipe.svelte';
   import { bookingHref } from './lib/booking.svelte';
+  import { POLICY_UPDATED, policies } from './lib/policies';
   import { BRAND, COMPANY, EMAIL, LANGS, PHONE, i18n, setLang, t } from './lib/i18n.svelte';
 
   const BASE = import.meta.env.BASE_URL;
@@ -11,6 +12,16 @@
     after: `${BASE}${n}.jpg`,
     before: `${BASE}${n}-before.jpg`,
   }));
+
+  let dialog: HTMLDialogElement;
+  let policyIndex = $state(0);
+  const policy = $derived(policies[i18n.lang].items[policyIndex]);
+
+  function openPolicy(index: number) {
+    policyIndex = index;
+    dialog.showModal();
+    dialog.scrollTop = 0;
+  }
 
   const COOKIE_KEY = 'cookie-ok';
 
@@ -51,7 +62,7 @@
       </button>
     {/each}
   </div>
-  <a class="btn btn-accent" href={bookingHref()}>{t().nav.book}</a>
+  <a class="btn btn-accent" href={bookingHref()} target="_blank" rel="noopener">{t().nav.book}</a>
 </header>
 
 <main id="top">
@@ -132,7 +143,7 @@
     <div class="cta">
       <h2>{t().cta.title}</h2>
       <p>{t().cta.sub}</p>
-      <a class="btn btn-accent" href={bookingHref()}>{t().cta.btn}</a>
+      <a class="btn btn-accent" href={bookingHref()} target="_blank" rel="noopener">{t().cta.btn}</a>
     </div>
   </section>
 </main>
@@ -145,18 +156,34 @@
     </div>
     <div>
       <h3>{t().footer.info}</h3>
-      {#each t().footer.links as link}
-        <a href="#top">{link}</a>
+      {#each policies[i18n.lang].items as item, i}
+        <button class="link" onclick={() => openPolicy(i)}>{item.title}</button>
       {/each}
     </div>
     <div>
       <h3>{t().footer.contact}</h3>
       <a href="tel:{PHONE.replaceAll(' ', '')}">{PHONE}</a>
+      <a href="https://wa.me/{PHONE.replace(/\D/g, '')}" target="_blank" rel="noopener">WhatsApp</a>
       <a href="mailto:{EMAIL}">{EMAIL}</a>
       <span>{t().footer.address}</span>
     </div>
   </div>
 </footer>
+
+<!-- svelte-ignore a11y_click_events_have_key_events, a11y_no_noninteractive_element_interactions -->
+<dialog bind:this={dialog} class="policy" onclick={(e) => e.target === dialog && dialog.close()}>
+  <article>
+    <header>
+      <h2>{policy.title}</h2>
+      <button class="close" aria-label={policies[i18n.lang].close} onclick={() => dialog.close()}>×</button>
+    </header>
+    <small>{policies[i18n.lang].updated}: {POLICY_UPDATED}</small>
+    {#each policy.sections as section}
+      <h3>{section.h}</h3>
+      <p>{section.p}</p>
+    {/each}
+  </article>
+</dialog>
 
 {#if !cookieOk}
   <div class="cookie" role="status">
@@ -400,6 +427,59 @@
     color: var(--on-accent);
   }
 
+
+  .link {
+    text-align: left;
+  }
+  .link:hover,
+  .footer a:hover {
+    color: var(--accent);
+  }
+  .policy {
+    width: min(calc(100% - 32px), 680px);
+    max-height: min(84svh, 760px);
+    padding: 0;
+    border: 0;
+    border-radius: var(--radius-lg);
+    background: var(--surface);
+    color: var(--ink);
+    box-shadow: var(--shadow);
+  }
+  .policy::backdrop {
+    background: rgb(0 0 0 / 0.6);
+  }
+  .policy article {
+    padding: 28px;
+    display: grid;
+    gap: 10px;
+  }
+  .policy header {
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .policy h2 {
+    margin: 0;
+    font-size: 26px;
+  }
+  .policy h3 {
+    margin-top: 10px;
+    font-size: 16px;
+  }
+  .policy p,
+  .policy small {
+    color: var(--ink-soft);
+  }
+  .close {
+    width: 36px;
+    height: 36px;
+    flex: none;
+    border-radius: 50%;
+    background: var(--muted);
+    font-size: 22px;
+    line-height: 1;
+  }
 
   .cookie {
     position: fixed;
