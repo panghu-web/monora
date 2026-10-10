@@ -159,23 +159,19 @@ const en: typeof zh = {
 const dicts = { zh, en };
 export type Lang = keyof typeof dicts;
 export const LANGS: { code: Lang; short: string }[] = [
-  { code: 'zh', short: '中' },
   { code: 'en', short: 'EN' },
+  { code: 'zh', short: '中' },
 ];
 
 const STORAGE_KEY = 'lang';
 
-// 首次访问按浏览器语言定:偏好列表里先出现中文就用中文,否则英文;手动切换过的以用户选择为准
+// 默认英文;访客手动切换过的以他的选择为准
 function detect(): Lang {
   try {
     const saved = localStorage.getItem(STORAGE_KEY);
     if (saved && saved in dicts) return saved as Lang;
   } catch {
-    // 隐私模式下读不了存储,按浏览器语言走
-  }
-  for (const tag of navigator.languages ?? [navigator.language]) {
-    const code = tag.toLowerCase().split('-')[0];
-    if (code in dicts) return code as Lang;
+    // 隐私模式下读不了存储,用默认语言
   }
   return 'en';
 }
