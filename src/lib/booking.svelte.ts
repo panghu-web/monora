@@ -1,20 +1,14 @@
 import { CURRENCY, PHONE, t } from './i18n.svelte';
 
-// 起步价含 1 个房间 + 1 个浴室;房间、浴室各自计:第 2 个 +20,第 3 个起每个 +10
-// 厨房必选且固定 1 个,另加 40
-const PRICE = { base: 75, second: 20, more: 10, kitchen: 40 };
+// 按个数计价:房间、浴室、厨房每个 20;厨房必选且固定 1 个
+const PRICE = { room: 20, bath: 20, kitchen: 20 };
 export const KITCHENS = 1;
-
-function extra(count: number) {
-  if (count <= 1) return 0;
-  return PRICE.second + (count - 2) * PRICE.more;
-}
 
 // 计算器里选的数量;页面上所有「预订」按钮共用这一份
 export const booking = $state({ rooms: 1, baths: 1 });
 
 export function total() {
-  return PRICE.base + extra(booking.rooms) + extra(booking.baths) + PRICE.kitchen;
+  return booking.rooms * PRICE.room + booking.baths * PRICE.bath + KITCHENS * PRICE.kitchen;
 }
 
 /** 预订链接:打开 WhatsApp 对话,带上当前选的房间数、浴室数、预估价格和一段写好的消息 */
