@@ -7,10 +7,12 @@
 </script>
 
 <figure class="compare" style:--pos="{pos}%">
-  <div class="pane after" style:background-image="url({img})">
+  <div class="pane after">
+    <img src={img} alt="{label} · {t().compare.after}" loading="lazy" decoding="async" />
     <span class="tag right">{t().compare.after}</span>
   </div>
-  <div class="pane before" class:aged={!before} style:background-image="url({before ?? img})">
+  <div class="pane before" class:aged={!before}>
+    <img src={before ?? img} alt="{label} · {t().compare.before}" loading="lazy" decoding="async" />
     <span class="tag">{t().compare.before}</span>
   </div>
   <div class="handle" aria-hidden="true">↔</div>
@@ -30,8 +32,12 @@
   .pane {
     position: absolute;
     inset: 0;
-    background-size: cover;
-    background-position: center;
+  }
+  .pane img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
   .aged {
     filter: grayscale(0.75) sepia(0.35) brightness(0.62) contrast(0.85);

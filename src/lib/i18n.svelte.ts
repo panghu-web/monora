@@ -10,7 +10,16 @@ const zh = {
   nav: { why: '为什么选我们', contact: '联系我们', book: '立即预订' },
   hero: {
     title: ['家里干净了,', '心也跟着松下来。'],
-    sub: '上门家居与办公室清洁。在线算好价格,约好时间,剩下的交给我们。',
+    sub: '拉斯海马专业上门家居与公寓清洁。在线算好价格,用 WhatsApp 预约,剩下的交给我们。',
+  },
+  area: {
+    title: '拉斯海马上门清洁',
+    body: 'Monora 为拉斯海马的住宅和公寓提供上门清洁服务。按房间、浴室和厨房的数量计价,预约前就能看到价格。',
+    items: [
+      '房间:地面吸尘拖洗,家具表面除尘,镜面擦拭',
+      '浴室:洁具清洁并消毒',
+      '厨房:台面、灶台和水槽清洗,倒垃圾',
+    ],
   },
   calc: {
     rooms: '房间',
@@ -52,11 +61,11 @@ const zh = {
   faq: {
     title: '常见问题',
     items: [
-      { q: '日常清洁都做些什么?', a: '地面吸尘拖洗、台面和家具表面除尘、镜面擦拭、倒垃圾;厨房清洗台面、灶台和水槽;浴室清洁洁具并消毒。擦窗、烤箱内部这类项目可以下单时另加。' },
+      { q: '日常清洁都做些什么?', a: '地面吸尘拖洗、台面和家具表面除尘、镜面擦拭、倒垃圾;厨房清洗台面、灶台和水槽;浴室清洁洁具并消毒。' },
       { q: '需要我准备清洁工具吗?', a: '不用。保洁员会自带清洁剂、抹布和吸尘器。如果你想用自家的用品,提前说一声就可以。' },
       { q: '我不在家可以吗?', a: '可以。所有保洁员都经过身份核验和试岗考核,你可以留下钥匙或门禁方式,做完我们会发消息通知你。' },
       { q: '最快什么时候能上门?', a: '建议提前一到两天预约。临时需要的话直接联系我们,附近有空闲人员时当天也能安排。' },
-      { q: '怎么付款?', a: '支持在线刷卡,也可以服务完成后付现金。' },
+      { q: '怎么付款?', a: '付款方式在确认预约时和你约定。' },
       { q: '临时有事能改期吗?', a: '开始前 24 小时以上改期或取消都不收费。临近开始才取消的,可能会收一小笔空档费。' },
       { q: '固定预约有优惠吗?', a: '有。每周或隔周固定上门,会安排同一位保洁员,单次价格也比零散预约低。' },
       { q: '一次要多久?', a: '看面积和脏污程度。一居室大约三小时,两到三居室四到五小时,大户型六小时起。' },
@@ -85,7 +94,16 @@ const en: typeof zh = {
   nav: { why: 'Why us', contact: 'Contact', book: 'Book now' },
   hero: {
     title: ['A clean home,', 'and one less thing to think about.'],
-    sub: 'Home and office cleaning at your door. Get a price online, pick a time, and leave the rest to us.',
+    sub: 'Professional home and apartment cleaning in Ras Al Khaimah, UAE. Get a price online, book on WhatsApp, and leave the rest to us.',
+  },
+  area: {
+    title: 'Home cleaning in Ras Al Khaimah',
+    body: 'Monora provides home and apartment cleaning across Ras Al Khaimah. Pricing is based on the number of rooms, bathrooms and kitchens, so you see the price before you book.',
+    items: [
+      'Rooms: vacuuming and mopping, dusting surfaces, wiping mirrors',
+      'Bathrooms: fittings cleaned and disinfected',
+      'Kitchen: worktops, hob and sink washed, rubbish taken out',
+    ],
   },
   calc: {
     rooms: 'Rooms',
@@ -127,11 +145,11 @@ const en: typeof zh = {
   faq: {
     title: 'FAQ',
     items: [
-      { q: 'What does a regular clean cover?', a: 'Vacuuming and mopping, dusting surfaces, wiping mirrors and taking out rubbish. Kitchen worktops, hob and sink are washed, and bathroom fittings are cleaned and disinfected. Windows and oven interiors can be added when you book.' },
+      { q: 'What does a regular clean cover?', a: 'Vacuuming and mopping, dusting surfaces, wiping mirrors and taking out rubbish. Kitchen worktops, hob and sink are washed, and bathroom fittings are cleaned and disinfected.' },
       { q: 'Do I need to supply anything?', a: 'No. Cleaners bring products, cloths and a vacuum. If you prefer your own supplies, just let us know beforehand.' },
       { q: 'Can I be out during the visit?', a: 'Yes. Every cleaner passes identity checks and a trial shift. Leave a key or access details and we will message you when the job is done.' },
       { q: 'How soon can you come?', a: 'One to two days ahead is best. For urgent jobs contact us directly, and same-day visits are possible when someone is free nearby.' },
-      { q: 'How do I pay?', a: 'By card online, or in cash once the job is finished.' },
+      { q: 'How do I pay?', a: 'We agree the payment method with you when we confirm the booking.' },
       { q: 'Can I reschedule?', a: 'Changes and cancellations are free up to 24 hours before the start. Later cancellations may carry a small fee.' },
       { q: 'Is a regular booking cheaper?', a: 'Yes. With weekly or fortnightly visits you get the same cleaner and a lower price per visit.' },
       { q: 'How long does it take?', a: 'It depends on size and condition. Roughly three hours for one bedroom, four to five for two or three, and six or more for larger homes.' },
@@ -165,18 +183,17 @@ export const LANGS: { code: Lang; short: string }[] = [
 
 const STORAGE_KEY = 'lang';
 
-// 默认英文;访客手动切换过的以他的选择为准
-function detect(): Lang {
+// 默认英文。页面是预渲染好的英文 HTML,先按英文接管,再换成访客上次手动选的语言
+export const i18n = $state({ lang: 'en' as Lang });
+
+export function restoreLang() {
   try {
     const saved = localStorage.getItem(STORAGE_KEY);
-    if (saved && saved in dicts) return saved as Lang;
+    if (saved && saved in dicts) i18n.lang = saved as Lang;
   } catch {
-    // 隐私模式下读不了存储,用默认语言
+    // 隐私模式下读不了存储,保持默认语言
   }
-  return 'en';
 }
-
-export const i18n = $state({ lang: detect() });
 
 export function setLang(lang: Lang) {
   i18n.lang = lang;

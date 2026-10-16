@@ -7,7 +7,7 @@
   import { BRAND, COMPANY, EMAIL, LANGS, PHONE, i18n, setLang, t } from './lib/i18n.svelte';
 
   const BASE = import.meta.env.BASE_URL;
-  const HERO_IMG = `${import.meta.env.BASE_URL}hero.jpg`;
+  const HERO_IMG = `${import.meta.env.BASE_URL}hero.webp`;
   const COMPARE_IMGS = ['kitchen', 'bedroom', 'living', 'bathroom'].map((n) => ({
     after: `${BASE}${n}.jpg`,
     before: `${BASE}${n}-before.jpg`,
@@ -33,7 +33,11 @@
       return false; // 读不了存储就每次都提示
     }
   }
-  let cookieOk = $state(readCookieOk());
+  // 预渲染时先不出提示条;到了浏览器里再按本地记录决定要不要显示
+  let cookieOk = $state(true);
+  $effect(() => {
+    cookieOk = readCookieOk();
+  });
 
   function acceptCookie() {
     cookieOk = true;
@@ -50,7 +54,7 @@
 </script>
 
 <header class="nav">
-  <a class="brand" href="#top"><img src="{BASE}logo-wordmark.png" alt={COMPANY} width="720" height="149" /></a>
+  <a class="brand" href="#top"><img src="{BASE}logo-wordmark.webp" alt={COMPANY} width="720" height="149" /></a>
   <nav>
     <a href="#why">{t().nav.why}</a>
     <a href="#contact">{t().nav.contact}</a>
@@ -73,6 +77,16 @@
       <p>{t().hero.sub}</p>
       <Calculator />
     </div>
+  </section>
+
+  <section class="wrap area">
+    <h2>{t().area.title}</h2>
+    <p>{t().area.body}</p>
+    <ul>
+      {#each t().area.items as item}
+        <li>{item}</li>
+      {/each}
+    </ul>
   </section>
 
   <section id="why" class="band">
@@ -151,7 +165,7 @@
 <footer id="contact" class="footer">
   <div class="wrap grid three">
     <div>
-      <img class="mark" src="{BASE}logo-mark.png" alt={BRAND} width="512" height="470" />
+      <img class="mark" src="{BASE}logo-mark.webp" alt={BRAND} width="512" height="470" loading="lazy" />
       <small>© {new Date().getFullYear()} {COMPANY} · {t().footer.rights}</small>
     </div>
     <div>
@@ -265,6 +279,19 @@
   }
   .band > .wrap {
     padding-block: 72px;
+  }
+  .area {
+    padding-bottom: 0;
+  }
+  .area p {
+    max-width: 720px;
+    color: var(--ink-soft);
+  }
+  .area ul {
+    margin: 20px 0 0;
+    padding-left: 20px;
+    display: grid;
+    gap: 6px;
   }
   .narrow {
     max-width: 760px;
