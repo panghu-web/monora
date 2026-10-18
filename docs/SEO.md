@@ -1,6 +1,6 @@
 # Monora 网站 SEO 进度
 
-最后更新:2026-10-16
+最后更新:2026-10-18
 
 线上地址:https://monorabuilding.com
 
@@ -21,6 +21,10 @@
 | 域名 | `monorabuilding.com`,在 tenten.vn 注册,解析后台 https://domain.tenten.vn/ApiDnsSetting |
 | 托管 | GitHub Pages,仓库 `panghu-web/monora`,推送 `main` 自动发布 |
 | 默认语言 | 英文;页面右上角可切中文(同一网址,靠按钮切换) |
+| 服务范围 | 整个拉斯海马(Ras Al Khaimah 全境),不细分片区 |
+| 公司登记地址 | Al Nazish Business Center LLC,拉斯海马(Google 地图:https://maps.app.goo.gl/kuH9rFzNHobXy7ZY8) |
+| 账号 | 各平台统一用 monorabuilding@gmail.com 注册 / 登录(登录由用户本人完成) |
+| 照片 | 暂无公司实拍照片;不用图库照片冒充实拍,可用 logo 与 `og-image.jpg` |
 
 ## 操作须知
 
@@ -87,6 +91,8 @@
 - 目标:出现在 Google 地图和本地搜索,收集真实评价。对本地生意是最重要的一项
 - 步骤:https://business.google.com → 用和 Search Console 同一个 Google 账号创建商家 → 名称 `Monora Cleaning Services` → 类别选清洁服务类 → 选「上门服务、不对外开放实体店面」,服务区域 Ras Al Khaimah → 电话、网站 → 营业时间(问用户)→ 验证
 - 需要用户:营业时间;验证(Google 可能要求视频、电话或明信片,只能用户本人完成)
+- 地址:公司登记在 Al Nazish Business Center(商务中心)。按 Google 商家资料的规则,商务中心 / 虚拟办公室地址不能作为对外展示的门店,否则可能被停用。应设为**上门服务商家并隐藏地址**,服务区域填拉斯海马;登记地址只用于验证
+- 照片:暂无实拍,先只放 logo,不放图库照片
 - 完成标志:商家资料已验证并公开;拿到「请客户评价」的专属链接,记到本文件
 
 ### 3. 收集评价:WhatsApp 跟进模板 + 网站评价按钮 ⬜(依赖 2)
