@@ -87,14 +87,17 @@
 - 需要用户:Chrome 里已登录要用的 Google 账号
 - 完成标志:Search Console 显示所有权已验证,站点地图状态「成功」
 
-### 2. Google 商家资料(Google Business Profile)⬜
+### 2. Google 商家资料(Google Business Profile)🟡 已建好,待验证
 
-- 目标:出现在 Google 地图和本地搜索,收集真实评价。对本地生意是最重要的一项
-- 步骤:https://business.google.com → 用和 Search Console 同一个 Google 账号创建商家 → 名称 `Monora Cleaning Services` → 类别选清洁服务类 → 选「上门服务、不对外开放实体店面」,服务区域 Ras Al Khaimah → 电话、网站 → 营业时间(问用户)→ 验证
-- 需要用户:营业时间;验证(Google 可能要求视频、电话或明信片,只能用户本人完成)
-- 地址:公司登记在 Al Nazish Business Center(商务中心)。按 Google 商家资料的规则,商务中心 / 虚拟办公室地址不能作为对外展示的门店,否则可能被停用。应设为**上门服务商家并隐藏地址**,服务区域填拉斯海马;登记地址只用于验证
-- 照片:暂无实拍,先只放 logo,不放图库照片
-- 完成标志:商家资料已验证并公开;拿到「请客户评价」的专属链接,记到本文件
+- 2026-10-16 用用户本人的 Google 账号创建,**不要再新建同名资料**(会被判为重复)
+- 已填:名称 Monora Cleaning Services;类别 House cleaning service;上门服务、隐藏地址;服务区域 Ras Al Khaimah;电话 +971 50 683 8899;网站 https://monorabuilding.com;营业时间每天 10:00–20:00
+- 2026-10-18 补充:验证邮寄地址填商务中心楼址 Al Nazish Business Center, 130 Sheikh Saqr Bin Muhammad Al Qasimi Street, Shamal, Ras al Khaimah(对外隐藏);服务项目 Standard cleaning + 自定义 Apartment / Kitchen / Bathroom cleaning(按网站实际内容,未勾深度清洁、搬家、办公室);商家介绍已写(只写属实内容,484 字符)
+- 跳过:门店照片、作品照片(暂无实拍);Google Ads 赠金、Google Workspace 试用(涉及付费,需用户决定)
+- **待用户本人**:
+  - 验证:Google 只给了「录制商家视频」一种方式。一镜到底约 1 分钟:周边街道 → 清洁工具 / 车辆 → 营业执照或手机上的商家资料后台
+  - 上传 logo:Google 的上传框在跨域框架里,浏览器工具传不进去。文件在 `docs/assets/monora-logo-square.png`(黑底正方形 720×720)
+- 可选:四组清洁前后对照图是用户自有照片,可作为「作品照片」上传(会公开显示,需用户同意)
+- 以后交给公司邮箱管理:在商家资料里把 monorabuilding@gmail.com 加为所有者
 
 ### 3. 收集评价:WhatsApp 跟进模板 + 网站评价按钮 ⬜(依赖 2)
 
