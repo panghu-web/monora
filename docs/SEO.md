@@ -22,6 +22,7 @@
 | 托管 | GitHub Pages,仓库 `panghu-web/monora`,推送 `main` 自动发布 |
 | 默认语言 | 英文;页面右上角可切中文(同一网址,靠按钮切换) |
 | 服务范围 | 整个拉斯海马(Ras Al Khaimah 全境),不细分片区 |
+| 营业时间 | 每天 10:00–20:00 |
 | 公司登记地址 | Al Nazish Business Center LLC,拉斯海马(Google 地图:https://maps.app.goo.gl/kuH9rFzNHobXy7ZY8) |
 | 账号 | 各平台统一用 monorabuilding@gmail.com 注册 / 登录(登录由用户本人完成) |
 | 照片 | 暂无公司实拍照片;不用图库照片冒充实拍,可用 logo 与 `og-image.jpg` |
