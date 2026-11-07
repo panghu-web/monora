@@ -7,6 +7,7 @@
     { label: t().calc.baths, get: () => booking.baths, set: (v: number) => (booking.baths = v), min: 1, fixed: false },
     // 厨房必选、数量固定,两个按钮都不可点
     { label: t().calc.kitchen, get: () => KITCHENS, set: () => {}, min: KITCHENS, fixed: true },
+    { label: t().calc.balconies, get: () => booking.balconies, set: (v: number) => (booking.balconies = v), min: 0, fixed: false },
   ]);
 </script>
 

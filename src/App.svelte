@@ -9,8 +9,8 @@
   const BASE = import.meta.env.BASE_URL;
   const HERO_IMG = `${import.meta.env.BASE_URL}hero.webp`;
   const COMPARE_IMGS = ['kitchen', 'bedroom', 'living', 'bathroom'].map((n) => ({
-    after: `${BASE}${n}.jpg`,
-    before: `${BASE}${n}-before.jpg`,
+    after: `${BASE}${n}.webp`,
+    before: `${BASE}${n}-before.webp`,
   }));
 
   let dialog: HTMLDialogElement;
