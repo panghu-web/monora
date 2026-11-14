@@ -1,7 +1,7 @@
 // 文案全部在这里。品牌名、电话、邮箱、价格都是占位,上线前替换。
 
 export const BRAND = 'Monora';
-export const COMPANY = 'Monora Cleaning Services LLC';
+export const COMPANY = 'Monora Building Cleaning Services LLC';
 export const PHONE = '+971 50 683 8899';
 export const EMAIL = 'monorabuilding@gmail.com';
 export const CURRENCY = 'AED';

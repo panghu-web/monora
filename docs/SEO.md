@@ -12,7 +12,7 @@
 
 | 项目 | 值 |
 |---|---|
-| 公司 | Monora Cleaning Services LLC |
+| 公司 | Monora Building Cleaning Services LLC(营业执照名称;2026-11-13 网站与商家资料统一改用) |
 | 业务 | 上门家居与公寓清洁 |
 | 地区 | UAE. Ras Al Khaimah(拉斯海马) |
 | 电话 / WhatsApp | +971 50 683 8899 |
@@ -90,14 +90,14 @@
 ### 2. Google 商家资料(Google Business Profile)🟡 已建好,待验证
 
 - 2026-10-16 用用户本人的 Google 账号创建,**不要再新建同名资料**(会被判为重复)
-- 已填:名称 Monora Cleaning Services;类别 House cleaning service;上门服务、隐藏地址;服务区域 Ras Al Khaimah;电话 +971 50 683 8899;网站 https://monorabuilding.com;营业时间每天 10:00–20:00
+- 已填:名称 Monora Building Cleaning Services(2026-11-13 由 Monora Cleaning Services 改为执照名称);类别 House cleaning service;上门服务、隐藏地址;服务区域 Ras Al Khaimah;电话 +971 50 683 8899;网站 https://monorabuilding.com;营业时间每天 10:00–20:00
 - 2026-10-18 补充:验证邮寄地址填商务中心楼址 Al Nazish Business Center, 130 Sheikh Saqr Bin Muhammad Al Qasimi Street, Shamal, Ras al Khaimah(对外隐藏);服务项目 Standard cleaning + 自定义 Apartment / Kitchen / Bathroom cleaning(按网站实际内容,未勾深度清洁、搬家、办公室);商家介绍已写(只写属实内容,484 字符)
 - 跳过:门店照片、作品照片(暂无实拍);Google Ads 赠金、Google Workspace 试用(涉及付费,需用户决定)
 - **待用户本人**:
   - 验证:Google 只给了「录制商家视频」一种方式。一镜到底约 1 分钟:周边街道 → 清洁工具 / 车辆 → 营业执照或手机上的商家资料后台
   - 上传 logo:Google 的上传框在跨域框架里,浏览器工具传不进去。文件在 `docs/assets/monora-logo-square.png`(黑底正方形 720×720)
 - 作品照片:用户 2026-10-18 同意上传四组自有清洁前后对照图(上为清洁前、下为清洁后),文件在 `docs/assets/work-photos/`;需用户在 Google 上传框里自己选,浏览器工具传不进去
-- 验证视频:用户暂时没有,先搁置
+- 验证视频:用户 2026-11-13 拍好(约 72 秒,含楼外观、清洁用品、67 号工位名牌、营业执照);14.9 MB 超出浏览器工具上传上限,由用户在手机 Google 地图 App 里上传
 - 以后交给公司邮箱管理:在商家资料里把 monorabuilding@gmail.com 加为所有者
 
 ### 3. 收集评价:WhatsApp 跟进模板 + 网站评价按钮 ⬜(依赖 2)
