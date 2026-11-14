@@ -113,9 +113,11 @@
 - 待同步:Google 商家资料(第 2 项)的服务区域填 Ras Al Khaimah 全境
 - 以后若改为只覆盖部分片区,需用户提供真实片区名,不要自己编
 
-### 5. Bing Webmaster Tools ⬜(依赖 1)
+### 5. Bing Webmaster Tools ✅
 
-- https://www.bing.com/webmasters → 选择从 Google Search Console 导入,一步完成验证和站点地图
+- 2026-11-14:用用户的 Google 账号登录 Bing 网站管理员工具,从 Google Search Console 导入 monorabuilding.com(授权只读 Search Console 数据 + 邮箱,用户本人点的允许)
+- 手动提交站点地图 https://monorabuilding.com/sitemap.xml(状态:处理中),并单独提交首页网址
+- Bing 提示数据最多 48 小时后显示
 
 ### 6. 中文版独立网址 ⏸
 
