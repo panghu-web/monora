@@ -1,4 +1,5 @@
 import { CURRENCY, PHONE, t } from './i18n.svelte';
+import { sourceLabel } from './source.svelte';
 
 // 按个数计价:房间、浴室、厨房、阳台每个 20;厨房必选且固定 1 个,阳台可选、默认 0
 const PRICE = { room: 20, bath: 20, kitchen: 20, balcony: 20 };
@@ -30,6 +31,21 @@ export function bookingHref() {
     `${m.notes}: `,
     '',
     m.thanks,
+    ...sourceLine(),
   ].join('\n');
-  return `https://wa.me/${PHONE.replace(/\D/g, '')}?text=${encodeURIComponent(body)}`;
+  return whatsappHref(body);
+}
+
+/** 悬浮按钮用的简短咨询消息,同样带来源 */
+export function chatHref() {
+  return whatsappHref([t().chat.message, ...sourceLine()].join('\n'));
+}
+
+function sourceLine(): string[] {
+  const label = sourceLabel();
+  return label ? ['', `${t().mail.source}: ${label}`] : [];
+}
+
+function whatsappHref(text: string) {
+  return `https://wa.me/${PHONE.replace(/\D/g, '')}?text=${encodeURIComponent(text)}`;
 }

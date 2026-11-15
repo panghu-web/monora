@@ -88,6 +88,11 @@ const zh = {
     phone: '联系电话',
     notes: '其他说明(有无宠物、重点清洁区域等)',
     thanks: '期待回复,谢谢!',
+    source: '来源',
+  },
+  chat: {
+    label: '在 WhatsApp 上咨询',
+    message: '你好,我想咨询一下你们的上门清洁服务。',
   },
 };
 
@@ -173,6 +178,11 @@ const en: typeof zh = {
     phone: 'Contact number',
     notes: 'Other notes (pets, areas needing extra attention, etc.)',
     thanks: 'Looking forward to your reply. Thank you!',
+    source: 'Source',
+  },
+  chat: {
+    label: 'Chat on WhatsApp',
+    message: 'Hello, I would like to ask about your home cleaning service.',
   },
 };
 
